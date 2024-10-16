@@ -1,0 +1,89 @@
+
+.weather-container {
+    background-color: rgba(255, 255, 255, 0.1); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin: 50px auto 100px auto;
+    width: 90%;
+}
+.heading{
+    margin-top: 50px;
+}
+
+.heading {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    width: 300px;
+}
+
+.error-message {
+    color: #ff4c4c; 
+    text-align: center;
+    margin: 10px 0;
+}
+
+.dropdown {
+    display: flex;
+    justify-content: center;
+}
+
+.dropdown select {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffffff; 
+}
+
+.weather-info {
+    color: #ffffff; 
+    margin-top: 20px;
+}
+
+.weather-info table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.weather-info th, .weather-info td {
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    padding: 10px;
+    text-align: left;
+}
+
+.weather-info th {
+    background-color: rgba(255, 255, 255, 0.2); 
+}
+
+.loading {
+    color: #ffffff; 
+    text-align: center;
+    margin: 10px 0;
+}
+
+.classCity{
+    margin-bottom: 10px;
+}
+
+.wheatherImg {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100%; 
+    margin-top: 120px;
+  }

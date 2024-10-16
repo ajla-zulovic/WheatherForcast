@@ -1,0 +1,68 @@
+/* General container styling */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black; 
+  }
+  
+
+  form {
+    background-color: #333; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    width: 500px;
+    height: 400px;
+  }
+  
+
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #555; 
+    border-radius: 10px;
+    background-color: #222; 
+    color: #fff; 
+  }
+  
+ 
+  .input-field::placeholder {
+    color: #aaa;
+  }
+  
+
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 10px;
+    color: white; 
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: #45a049; 
+  }
+  
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  
+  .error-message {
+    color: red;
+    margin-bottom: 15px;
+  }
+  
+  h2{
+    color: #fff;
+    text-align: center;
+    margin: 5px 0px 15px 0;
+  }

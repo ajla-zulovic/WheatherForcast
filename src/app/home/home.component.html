@@ -1,0 +1,82 @@
+
+<div class="wheatherImg">
+    <img [src]="source" height="650" width="1150" />
+  </div>
+<h2 class="heading">Search and find out the forecast</h2>
+<div class="weather-container">
+    <div class="search-box">
+        <input
+        (change)="onCitySelect($event)"
+            type="text"
+            [(ngModel)]="searchTerm"
+            (input)="onSearchChange()"
+            placeholder="Pretraži grad..."
+        />
+    </div>
+
+   
+    <div *ngIf="cityNotFound" class="error-message">
+        Grad nije pronađen.
+    </div>
+
+    <div class="dropdown" *ngIf="!cityNotFound">
+        <select (change)="onCitySelect($event)">
+            <option *ngFor="let city of filteredCities" [value]="city.name">
+                {{ city.name }}
+            </option>
+        </select>
+    </div>
+
+    <div *ngIf="selectedCity" class="weather-info">
+        <h3 class="classCity">Odabrani grad: {{ selectedCity.name }}</h3>
+
+        <div *ngIf="weatherData; else loadingOrError">
+            <h4>Vremenska prognoza za {{ selectedCity.name }}</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameters</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Temperature</td>
+                        <td>
+                            {{ weatherData.main.temp }} °C 
+                            <img 
+                                [src]="getWeatherIcon(weatherData.weather[0].description)" 
+                                alt="{{ weatherData.weather[0].description }}" 
+                                width="30" 
+                                height="30"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Details</td>
+                        <td>
+                            {{ weatherData.weather[0].description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Humidity</td>
+                        <td>{{ weatherData.main.humidity }} %</td>
+                    </tr>
+                    <tr>
+                        <td>Pressure</td>
+                        <td>{{ weatherData.main.pressure }} hPa</td>
+                    </tr>
+                    <tr>
+                        <td>Wind speed</td>
+                        <td>{{ weatherData.wind.speed }} m/s</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <ng-template #loadingOrError>
+            <div *ngIf="loading" class="loading">Učitavanje...</div>
+            <div *ngIf="!loading && !weatherData" class="error-message">Nema podataka o vremenu.</div>
+        </ng-template>
+    </div>
+</div>

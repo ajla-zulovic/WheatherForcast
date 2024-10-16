@@ -1,0 +1,134 @@
+<!-- 
+
+
+
+ <div class="dashboard-container">
+  <div class="sidebar">
+    <h3>User Actions</h3>
+    <button *ngIf="!isAdmin" class="sentRequest" (click)="loadSentRequests()">List of Request</button>
+    <button *ngIf="!isAdmin" class="sendRequest" (click)="showRequestForm()">Send Request</button>
+    <button *ngIf="isAdmin" class="viewRequests" (click)="loadRequests()">View Requests</button>
+  </div>
+
+  <div class="form-container" *ngIf="!isAdmin && !showSentRequests">
+    <h3 *ngIf="isFormVisible">Request Form</h3>
+    <form *ngIf="isFormVisible" (ngSubmit)="onSubmit(weatherForm)" #weatherForm="ngForm">
+      <label for="city">City name:</label>
+      <input type="text" id="city" name="city" ngModel required placeholder="Enter city name" />
+      <label for="forecast">Select:</label>
+      <select id="forecast" name="forecast" ngModel required>
+        <option value="3">3 days</option>
+        <option value="5">5 days</option>
+        <option value="10">10 days</option>
+      </select>
+      <label for="requestDetails">Request Details:</label>
+      <textarea id="requestDetails" name="requestDetails" [(ngModel)]="requestDetails"></textarea>
+      <button class="submit" type="submit">Submit</button>
+      <button class="clear" type="button" (click)="clearForm(weatherForm)">Clear</button>
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+    </form>
+  </div>
+
+  <div class="sent-requests" *ngIf="!isAdmin && showSentRequests">
+    <h2>Sent Requests</h2>
+    <div class="request-card" *ngFor="let request of sentRequests">
+      <h4>{{ request.city }} - {{ request.forecast }} days</h4>
+      <p><strong>Requested by:</strong> {{ request.userEmail }}</p>
+      <p><strong>Details:</strong> {{ request.requestDetails }}</p>
+      <p *ngIf="request.replyMessage"><strong>Admin reply:</strong> {{ request.replyMessage }}</p>
+    </div>
+  </div>
+
+  <div class="admin-requests" *ngIf="isAdmin">
+    <h2>Requests</h2>
+    <div class="request-card" *ngFor="let request of requests; let i = index">
+      <div class="requestInfo">
+        <h4>{{ request.city }} - {{ request.forecast }} days</h4>
+        <p><strong>Requested by:</strong> {{ request.userEmail }}</p>
+        <p><strong>Details:</strong> {{ request.requestDetails }}</p>
+        
+       
+        <div *ngIf="!request.replyMessage">
+          <textarea [(ngModel)]="requests[i].replyMessage" placeholder="Write your reply here"></textarea>
+          <button class="reply-btn" (click)="replyToRequest(request, i, requests[i].replyMessage)">Reply</button>
+        </div>
+        
+        <button class="delete-btn" (click)="confirmDelete(request, i)">Delete</button>
+
+      
+        <p *ngIf="request.replyMessage"><strong>Admin reply:</strong> {{ request.replyMessage }}</p>
+        <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+<div class="dashboard-container">
+  <div class="sidebar">
+    <h3>User Actions</h3>
+    <button *ngIf="!isAdmin" class="sentRequest" (click)="loadSentRequests()">List of Request</button>
+    <button *ngIf="!isAdmin" class="sendRequest" (click)="showRequestForm()">Send Request</button>
+    <button *ngIf="isAdmin" class="viewRequests" (click)="loadRequests()">View Requests</button>
+  </div>
+
+  <div class="form-container" *ngIf="!isAdmin && !showSentRequests">
+    <h3 *ngIf="isFormVisible">Request Form</h3>
+    <form *ngIf="isFormVisible" (ngSubmit)="onSubmit(weatherForm)" #weatherForm="ngForm">
+      <label for="city">City name:</label>
+      <input type="text" id="city" name="city" ngModel required placeholder="Enter city name" />
+      <label for="forecast">Select:</label>
+      <select id="forecast" name="forecast" ngModel required>
+        <option value="3">3 days</option>
+        <option value="5">5 days</option>
+        <option value="10">10 days</option>
+      </select>
+      <label for="requestDetails">Request Details:</label>
+      <textarea id="requestDetails" name="requestDetails" [(ngModel)]="requestDetails"></textarea>
+      <button class="submit" type="submit">Submit</button>
+      <button class="clear" type="button" (click)="clearForm(weatherForm)">Clear</button>
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+    </form>
+  </div>
+
+  <div class="sent-requests" *ngIf="!isAdmin && showSentRequests">
+    <h2>Sent Requests</h2>
+    <div class="request-card" *ngFor="let request of sentRequests">
+      <h4>{{ request.city }} - {{ request.forecast }} days</h4>
+      <p><strong>Requested by:</strong> {{ request.userEmail }}</p>
+      <p><strong>Details:</strong> {{ request.requestDetails }}</p>
+      <p *ngIf="request.replyMessage"><strong>Admin reply:</strong> {{ request.replyMessage }}</p>
+    </div>
+  </div>
+
+  <div class="admin-requests" *ngIf="isAdmin">
+    <h2>Requests</h2>
+    <div class="request-card" *ngFor="let request of requests; let i = index">
+      <div class="requestInfo">
+        <h4>{{ request.city }} - {{ request.forecast }} days</h4>
+        <p><strong>Requested by:</strong> {{ request.userEmail }}</p>
+        <p><strong>Details:</strong> {{ request.requestDetails }}</p>
+
+        
+        <div *ngIf="!request.replyMessage && !request.isReplying">
+          <button class="reply-btn" (click)="toggleReply(request)">Reply</button>
+        </div>
+
+       
+        <div class="replyDiv" *ngIf="request.isReplying && !request.replyMessage">
+          <textarea [(ngModel)]="requests[i].currentReplyMessage" placeholder="Write your reply here"></textarea>
+          <button class="send-btn" (click)="replyToRequest(request, i)">Send</button>
+        </div>
+
+     
+        <p *ngIf="request.replyMessage"><strong>Admin reply:</strong> {{ request.replyMessage }}</p>
+
+        <button class="delete-btn" (click)="confirmDelete(request, i)">Delete</button>
+        <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+      </div>
+    </div>
+  </div>
+</div>

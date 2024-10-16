@@ -1,0 +1,27 @@
+<div class="header-container">
+  <div class="navbar">
+    <ul>
+      <li [routerLinkActive]="'active'">
+        <a routerLink="/home">Home</a>
+      </li>
+      <li [routerLinkActive]="'active'">
+        <a routerLink="/about">About us</a>
+      </li>
+      <li [routerLinkActive]="'active'">
+        <a routerLink="/privacy">Privacy</a>
+      </li>
+      <li [routerLinkActive]="'active'">
+        <a *ngIf="isLoggedIn" routerLink="/dashboard">Dashboard</a>
+      </li>
+    </ul>
+  </div>
+  <div class="login-button">
+    <button *ngIf="!isLoggedIn" (click)="onLogin()">Log in</button>
+    <button *ngIf="isLoggedIn" (click)="logout()">Log out</button>
+  </div>
+</div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>   
+
